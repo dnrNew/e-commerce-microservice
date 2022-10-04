@@ -1,6 +1,6 @@
 ﻿using VirtualStore.Model;
 
-namespace VirtualStore.Services.Implementations
+namespace VirtualStore.Services.PersonService
 {
     public class PersonService : IPersonService
     {
@@ -13,7 +13,7 @@ namespace VirtualStore.Services.Implementations
 
         public void Delete(long personId)
         {
-            
+
         }
 
         public List<Person> GetAll()
@@ -25,7 +25,7 @@ namespace VirtualStore.Services.Implementations
                 Person person = MockPerson(i);
                 persons.Add(person);
             }
-            
+
             return persons;
         }
 

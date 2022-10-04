@@ -1,6 +1,6 @@
 ﻿using VirtualStore.Model;
 
-namespace VirtualStore.Services
+namespace VirtualStore.Services.PersonService
 {
     public interface IPersonService
     {
