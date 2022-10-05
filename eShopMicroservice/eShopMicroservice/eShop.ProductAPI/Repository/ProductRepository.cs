@@ -55,7 +55,7 @@ namespace eShop.ProductAPI.Repository
             {
                 Product product = await _context.Products.Where(w => w.Id == id).FirstOrDefaultAsync();
 
-                if (product != null)
+                if (product == null)
                     return false;
 
                 _context.Products.Remove(product);
