@@ -1,3 +1,5 @@
+using AutoMapper;
+using eShop.ProductAPI.Config;
 using eShop.ProductAPI.Model.Context;
 using Microsoft.EntityFrameworkCore;
 
@@ -7,6 +9,10 @@ builder.Services.AddControllers();
 
 var connection = builder.Configuration["MySqlConnection:MySqlConnectionString"];
 builder.Services.AddDbContext<MySqlContext>(options => options.UseMySql(connection, new MySqlServerVersion(new Version(8, 0, 22))));
+
+IMapper mapper = MappingConfig.RegisterMaps().CreateMapper();
+builder.Services.AddSingleton(mapper);
+builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
