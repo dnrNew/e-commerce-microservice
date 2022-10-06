@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using eShop.ProductAPI.Model.Context;
+using static System.Net.WebRequestMethods;
 
 #nullable disable
 
@@ -62,7 +63,7 @@ namespace eShop.ProductAPI.Migrations
                             Id = 2L,
                             CategoryName = "Copos",
                             Description = "Copo Mário ideal para tomar suco e refrigerante.",
-                            ImageUrl = "https://github.com/dnrNew/virtual-store-microservice/tree/eShop/eShopMicroservice/eShopImages/Glass_Mario.jpg",
+                            ImageUrl = "https://github.com/dnrNew/e-shop-microservice/blob/eShop/eShopMicroservice/eShopImages/Glass_Mario.jpg",
                             Name = "Copo Mário",
                             Price = 35.45m
                         },
@@ -71,7 +72,7 @@ namespace eShop.ProductAPI.Migrations
                             Id = 3L,
                             CategoryName = "Copos",
                             Description = "Copo Mickey ideal para tomar suco e refrigerante.",
-                            ImageUrl = "https://github.com/dnrNew/virtual-store-microservice/tree/eShop/eShopMicroservice/eShopImages/Glass_Mickey.jpg",
+                            ImageUrl = "https://github.com/dnrNew/e-shop-microservice/blob/eShop/eShopMicroservice/eShopImages/Glass_Mickey.jpg",
                             Name = "Copo Mickey",
                             Price = 20.00m
                         },
@@ -80,7 +81,7 @@ namespace eShop.ProductAPI.Migrations
                             Id = 4L,
                             CategoryName = "Mouse Pad",
                             Description = "Mouse Pad Gamer Diablo ideal para jogos.",
-                            ImageUrl = "https://github.com/dnrNew/virtual-store-microservice/tree/eShop/eShopMicroservice/eShopImages/Mouse_Pad_Diablo.jpg",
+                            ImageUrl = "https://github.com/dnrNew/e-shop-microservice/blob/eShop/eShopMicroservice/eShopImages/Mouse_Pad_Diablo.jpg",
                             Name = "Mouse Pad Diablo",
                             Price = 35.45m
                         },
@@ -89,7 +90,7 @@ namespace eShop.ProductAPI.Migrations
                             Id = 5L,
                             CategoryName = "Mouse Pad",
                             Description = "Mouse Pad Gamer Mortal Kombat ideal para jogos.",
-                            ImageUrl = "https://github.com/dnrNew/virtual-store-microservice/tree/eShop/eShopMicroservice/eShopImages/Mouse_Pad_Mortal_Kombat.jpg",
+                            ImageUrl = "https://github.com/dnrNew/e-shop-microservice/blob/eShop/eShopMicroservice/eShopImages/Mouse_Pad_Mortal_Kombat.jpg",
                             Name = "Mouse Pad Mortal Kombat",
                             Price = 195.99m
                         },
@@ -98,7 +99,7 @@ namespace eShop.ProductAPI.Migrations
                             Id = 6L,
                             CategoryName = "Mouse Pad",
                             Description = "Mouse Pad Gamer Sonic ideal para jogos.",
-                            ImageUrl = "https://github.com/dnrNew/virtual-store-microservice/tree/eShop/eShopMicroservice/eShopImages/Mouse_Pad_Sonic.jpg",
+                            ImageUrl = "https://github.com/dnrNew/e-shop-microservice/blob/eShop/eShopMicroservice/eShopImages/Mouse_Pad_Sonic.jpg",
                             Name = "Mouse Pad Sonic",
                             Price = 89.00m
                         },
@@ -107,7 +108,7 @@ namespace eShop.ProductAPI.Migrations
                             Id = 7L,
                             CategoryName = "Camisas",
                             Description = "Camisa customizada Donkey Kong",
-                            ImageUrl = "https://github.com/dnrNew/virtual-store-microservice/tree/eShop/eShopMicroservice/eShopImages/T-Shirt_Donkey_Kong.jpg",
+                            ImageUrl = "https://github.com/dnrNew/e-shop-microservice/blob/eShop/eShopMicroservice/eShopImages/T-Shirt_Donkey_Kong.jpg",
                             Name = "Camisa Donkey Kong",
                             Price = 18.99m
                         },
@@ -116,7 +117,7 @@ namespace eShop.ProductAPI.Migrations
                             Id = 8L,
                             CategoryName = "Camisas",
                             Description = "Camisa customizada Gamer",
-                            ImageUrl = "https://github.com/dnrNew/virtual-store-microservice/tree/eShop/eShopMicroservice/eShopImages/T-Shirt_Gamer.jpg",
+                            ImageUrl = "https://github.com/dnrNew/e-shop-microservice/blob/eShop/eShopMicroservice/eShopImages/T-Shirt_Gamer.jpg",
                             Name = "Camisa Gamer",
                             Price = 15.45m
                         },
@@ -125,7 +126,7 @@ namespace eShop.ProductAPI.Migrations
                             Id = 9L,
                             CategoryName = "Camisas",
                             Description = "Camisa customizada Cavaleiro",
-                            ImageUrl = "https://github.com/dnrNew/virtual-store-microservice/tree/eShop/eShopMicroservice/eShopImages/T-Shirt_Cavaleiro.jpg",
+                            ImageUrl = "https://github.com/dnrNew/e-shop-microservice/blob/eShop/eShopMicroservice/eShopImages/T-Shirt_Cavaleiro.jpg",
                             Name = "Camisa Cavaleiro",
                             Price = 115.45m
                         },
@@ -134,7 +135,7 @@ namespace eShop.ProductAPI.Migrations
                             Id = 10L,
                             CategoryName = "Tolhas",
                             Description = "Tolha de Banho customizada Castlevania",
-                            ImageUrl = "https://github.com/dnrNew/virtual-store-microservice/tree/eShop/eShopMicroservice/eShopImages/Towel_Castlevania.jpg",
+                            ImageUrl = "https://github.com/dnrNew/e-shop-microservice/blob/eShop/eShopMicroservice/eShopImages/Towel_Castlevania.jpg",
                             Name = "Toalha Castlevania",
                             Price = 87.56m
                         },
@@ -143,7 +144,7 @@ namespace eShop.ProductAPI.Migrations
                             Id = 11L,
                             CategoryName = "Tolhas",
                             Description = "Tolha de Banho customizada Gamer",
-                            ImageUrl = "https://github.com/dnrNew/virtual-store-microservice/tree/eShop/eShopMicroservice/eShopImages/Towel_Gamer.jpg",
+                            ImageUrl = "https://github.com/dnrNew/e-shop-microservice/blob/eShop/eShopMicroservice/eShopImages/Towel_Gamer.jpg",
                             Name = "Toalha Gamer",
                             Price = 89.45m
                         },
@@ -152,7 +153,7 @@ namespace eShop.ProductAPI.Migrations
                             Id = 12L,
                             CategoryName = "Tolhas",
                             Description = "Tolha de Banho customizada Naruto",
-                            ImageUrl = "https://github.com/dnrNew/virtual-store-microservice/tree/eShop/eShopMicroservice/eShopImages/Towel_Naruto.jpg",
+                            ImageUrl = "https://github.com/dnrNew/e-shop-microservice/blob/eShop/eShopMicroservice/eShopImages/Towel_Naruto.jpg",
                             Name = "Toalha Naruto",
                             Price = 135.99m
                         },
@@ -161,7 +162,7 @@ namespace eShop.ProductAPI.Migrations
                             Id = 13L,
                             CategoryName = "Tolhas",
                             Description = "Tolha de Banho customizada Popeye",
-                            ImageUrl = "https://github.com/dnrNew/virtual-store-microservice/tree/eShop/eShopMicroservice/eShopImages/Towel_Popeye.jpg",
+                            ImageUrl = "https://github.com/dnrNew/e-shop-microservice/blob/eShop/eShopMicroservice/eShopImages/Towel_Popeye.jpg",
                             Name = "Toalha Popeye",
                             Price = 250.99m
                         });
