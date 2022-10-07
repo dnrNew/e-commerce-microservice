@@ -3,7 +3,6 @@ using eShop.IdentityServer.Models;
 using IdentityModel;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using Serilog;
 using System.Security.Claims;
 
 namespace eShop.IdentityServer
@@ -43,11 +42,6 @@ namespace eShop.IdentityServer
                     {
                         throw new Exception(result.Errors.First().Description);
                     }
-                    Log.Debug("alice created");
-                }
-                else
-                {
-                    Log.Debug("alice already exists");
                 }
 
                 var bob = userMgr.FindByNameAsync("bob").Result;
@@ -76,11 +70,6 @@ namespace eShop.IdentityServer
                     {
                         throw new Exception(result.Errors.First().Description);
                     }
-                    Log.Debug("bob created");
-                }
-                else
-                {
-                    Log.Debug("bob already exists");
                 }
             }
         }
