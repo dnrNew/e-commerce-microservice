@@ -1,9 +1,11 @@
-using Duende.IdentityServer;
 using eShop.IdentityServer.Configuration;
+using eShop.IdentityServer.Initializer;
 using eShop.IdentityServer.Model.Context;
 using eShop.IdentityServer.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using System.Data;
+using System.Runtime.CompilerServices;
 
 namespace eShop.IdentityServer
 {
@@ -32,6 +34,8 @@ namespace eShop.IdentityServer
                 .AddInMemoryClients(IdentityConfiguration.Clients)
                 .AddAspNetIdentity<ApplicationUser>();
 
+            builder.Services.AddScoped<IDbInitializer, DbInitializer>();
+
             return builder.Build();
         }
 
@@ -47,6 +51,12 @@ namespace eShop.IdentityServer
             app.UseRouting();
             app.UseIdentityServer();
             app.UseAuthorization();
+
+            using (var scope = app.Services.CreateScope())
+            {
+                var dbInitializer = scope.ServiceProvider.GetRequiredService<IDbInitializer>();
+                dbInitializer.Initialize();
+            }
 
             app.MapRazorPages()
                 .RequireAuthorization();
