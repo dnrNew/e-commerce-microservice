@@ -5,7 +5,7 @@ namespace eShop.IdentityServer.Configuration
     public static class IdentityConfiguration
     {
         public const string Admin = "Admin";
-        public const string Customer = "Customer";
+        public const string Client = "Client";
 
         public static IEnumerable<IdentityResource> IdentityResources =>
             new List<IdentityResource>
@@ -44,8 +44,8 @@ namespace eShop.IdentityServer.Configuration
 
                 AllowedGrantTypes = GrantTypes.Code,
 
-                RedirectUris = { "http://localhost:5201/signout-oidc" },
-                PostLogoutRedirectUris = { "http://localhost:5201/signout-callback-oidc" },
+                RedirectUris = { "https://localhost:4430/signout-oidc" },
+                PostLogoutRedirectUris = { "https://localhost:4430/signout-callback-oidc" },
 
                 AllowOfflineAccess = true,
                 AllowedScopes = { "openid", "profile", "email", "eShop" }
