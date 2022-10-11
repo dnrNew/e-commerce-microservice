@@ -44,7 +44,7 @@ namespace eShop.IdentityServer.Configuration
 
                 AllowedGrantTypes = GrantTypes.Code,
 
-                RedirectUris = { "https://localhost:4430/signout-oidc" },
+                RedirectUris = { "https://localhost:4430/signin-oidc" },
                 PostLogoutRedirectUris = { "https://localhost:4430/signout-callback-oidc" },
 
                 AllowOfflineAccess = true,
