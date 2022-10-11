@@ -1,5 +1,7 @@
 ﻿using eShop.ProductAPI.Data.ValueObjects;
 using eShop.ProductAPI.Repository;
+using eShop.ProductAPI.Utils;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace eShop.ProductAPI.Controllers
@@ -16,6 +18,7 @@ namespace eShop.ProductAPI.Controllers
         }
 
         [HttpGet]
+        [Authorize]
         public async Task<ActionResult<IEnumerable<ProductVO>>> GetAll()
         {
             var products = await _productRepository.GetAll();
@@ -24,6 +27,7 @@ namespace eShop.ProductAPI.Controllers
         }
 
         [HttpGet("{id}")]
+        [Authorize]
         public async Task<ActionResult<ProductVO>> GetById(long id)
         {
             var product = await _productRepository.GetById(id);
@@ -35,6 +39,7 @@ namespace eShop.ProductAPI.Controllers
         }
 
         [HttpPost]
+        [Authorize]
         public async Task<ActionResult<ProductVO>> Create([FromBody] ProductVO vo)
         {
             if (vo == null)
@@ -46,6 +51,7 @@ namespace eShop.ProductAPI.Controllers
         }
 
         [HttpPut]
+        [Authorize]
         public async Task<ActionResult<ProductVO>> Update([FromBody] ProductVO vo)
         {
             if (vo == null)
@@ -57,6 +63,7 @@ namespace eShop.ProductAPI.Controllers
         }
 
         [HttpDelete("{id}")]
+        [Authorize(Roles = Role.Admin)]
         public async Task<ActionResult> Delete(long id)
         {
             var status = await _productRepository.Delete(id);
