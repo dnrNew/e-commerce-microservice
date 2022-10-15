@@ -4,10 +4,10 @@ namespace eShop.Web.Services.IServices
 {
     public interface IProductService
     {
-        Task<IEnumerable<ProductModel>> GetAllProducts();
-        Task<ProductModel> GetProductById(long id);
-        Task<ProductModel> CreateProduct(ProductModel model);
-        Task<ProductModel> UpdateProduct(ProductModel model);
-        Task<bool> DeleteProductById(long id);
+        Task<IEnumerable<ProductModel>> GetAllProducts(string token);
+        Task<ProductModel> GetProductById(long id, string token);
+        Task<ProductModel> CreateProduct(ProductModel model, string token);
+        Task<ProductModel> UpdateProduct(ProductModel model, string token);
+        Task<bool> DeleteProductById(long id, string token);
     }
 }

@@ -1,6 +1,7 @@
 ﻿using eShop.Web.Models;
 using eShop.Web.Services.IServices;
 using eShop.Web.Utils;
+using System.Net.Http.Headers;
 
 namespace eShop.Web.Services
 {
@@ -14,36 +15,40 @@ namespace eShop.Web.Services
             _client = client ?? throw new ArgumentNullException(nameof(client));
         }
 
-        public async Task<IEnumerable<ProductModel>> GetAllProducts()
+        public async Task<IEnumerable<ProductModel>> GetAllProducts(string token)
         {
+            _client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
             var response = await _client.GetAsync(BasePath);
             var productsModel = await response.ReadContentAs<List<ProductModel>>();
 
             return productsModel;
         }
 
-        public async Task<ProductModel> GetProductById(long id)
+        public async Task<ProductModel> GetProductById(long id, string token)
         {
+            _client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
             var response = await _client.GetAsync($"{BasePath}/{id}");
             var productModel = await response.ReadContentAs<ProductModel>();
 
             return productModel;
         }
 
-        public async Task<ProductModel> CreateProduct(ProductModel model)
+        public async Task<ProductModel> CreateProduct(ProductModel model, string token)
         {
+            _client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
             var response = await _client.PostAsJson(BasePath, model);
 
             if (!response.IsSuccessStatusCode)
                 throw new Exception("Something went wrong calling the API");
-            
+
             var productModel = await response.ReadContentAs<ProductModel>();
 
             return productModel;
         }
 
-        public async Task<ProductModel> UpdateProduct(ProductModel model)
+        public async Task<ProductModel> UpdateProduct(ProductModel model, string token)
         {
+            _client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
             var response = await _client.PutAsJson(BasePath, model);
 
             if (!response.IsSuccessStatusCode)
@@ -54,8 +59,9 @@ namespace eShop.Web.Services
             return productModel;
         }
 
-        public async Task<bool> DeleteProductById(long id)
+        public async Task<bool> DeleteProductById(long id, string token)
         {
+            _client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
             var response = await _client.DeleteAsync($"{BasePath}/{id}");
 
             if (!response.IsSuccessStatusCode)
