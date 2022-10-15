@@ -18,7 +18,6 @@ namespace eShop.ProductAPI.Controllers
         }
 
         [HttpGet]
-        [Authorize]
         public async Task<ActionResult<IEnumerable<ProductVO>>> GetAll()
         {
             var products = await _productRepository.GetAll();
