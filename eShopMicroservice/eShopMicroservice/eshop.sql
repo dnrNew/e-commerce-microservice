@@ -7,5 +7,5 @@ INSERT INTO product VALUES (1, 'Copo Gamer com canudo', 23.99, 'Copo Gamer com c
 CREATE DATABASE eshop_identity_server;
 USE eshop_identity_server;
 
-show tables;
-select * from aspnetusers;
+CREATE DATABASE eshop_cart_api;
+USE eshop_cart_api;
