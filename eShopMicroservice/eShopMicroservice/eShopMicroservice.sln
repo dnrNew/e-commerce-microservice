@@ -11,7 +11,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "eShop.Web", "eShop.Web\eSho
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "eShop.ProductAPI", "eShop.ProductAPI\eShop.ProductAPI.csproj", "{5450FD47-F20F-43DF-B3CA-2AC40F5B0133}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "eShop.IdentityServer", "eShop.IdentityServer\eShop.IdentityServer.csproj", "{6263857C-7DFD-4EA4-9DF1-15D0456FE8E4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "eShop.IdentityServer", "eShop.IdentityServer\eShop.IdentityServer.csproj", "{6263857C-7DFD-4EA4-9DF1-15D0456FE8E4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

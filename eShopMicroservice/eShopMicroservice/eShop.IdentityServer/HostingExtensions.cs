@@ -1,11 +1,9 @@
 using eShop.IdentityServer.Configuration;
 using eShop.IdentityServer.Initializer;
+using eShop.IdentityServer.Model;
 using eShop.IdentityServer.Model.Context;
-using eShop.IdentityServer.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using System.Data;
-using System.Runtime.CompilerServices;
 
 namespace eShop.IdentityServer
 {
@@ -36,6 +34,8 @@ namespace eShop.IdentityServer
 
             builder.Services.AddScoped<IDbInitializer, DbInitializer>();
 
+            builder.Services.AddControllersWithViews();
+
             return builder.Build();
         }
 
@@ -45,9 +45,14 @@ namespace eShop.IdentityServer
             {
                 app.UseDeveloperExceptionPage();
             }
+            else
+            {
+                app.UseExceptionHandler("/Home/Error");
+            }
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();
+
             app.UseRouting();
             app.UseIdentityServer();
             app.UseAuthorization();
@@ -58,8 +63,14 @@ namespace eShop.IdentityServer
                 dbInitializer.Initialize();
             }
 
-            app.MapRazorPages()
-                .RequireAuthorization();
+            app.UseEndpoints(endpoints =>
+            {
+                endpoints.MapControllerRoute(
+                    name: "default",
+                    pattern: "{controller=Home}/{action=Index}/{id?}");
+
+                endpoints.MapRazorPages().RequireAuthorization();
+            });
 
             return app;
         }

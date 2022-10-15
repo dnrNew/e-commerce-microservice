@@ -1,5 +1,4 @@
-﻿using eShop.IdentityServer.Models;
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace eShop.IdentityServer.Model.Context

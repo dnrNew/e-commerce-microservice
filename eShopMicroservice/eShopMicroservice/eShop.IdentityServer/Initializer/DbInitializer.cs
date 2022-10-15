@@ -1,6 +1,6 @@
 ﻿using eShop.IdentityServer.Configuration;
 using eShop.IdentityServer.Model.Context;
-using eShop.IdentityServer.Models;
+using eShop.IdentityServer.Model;
 using IdentityModel;
 using Microsoft.AspNetCore.Identity;
 using System.Security.Claims;
@@ -40,7 +40,7 @@ namespace eShop.IdentityServer.Initializer
                 LastName = "Admin"
             };
 
-            _user.CreateAsync(admin, "Diego-admin_123$").GetAwaiter().GetResult();
+            _user.CreateAsync(admin, "$Diego-admin_123").GetAwaiter().GetResult();
             _user.AddToRoleAsync(admin, IdentityConfiguration.Admin).GetAwaiter().GetResult();
 
             var adminClaims = _user.AddClaimsAsync(admin, new Claim[]
@@ -61,7 +61,7 @@ namespace eShop.IdentityServer.Initializer
                 LastName = "Client"
             };
 
-            _user.CreateAsync(client, "Diego-client_123$").GetAwaiter().GetResult();
+            _user.CreateAsync(client, "$Diego-client_123").GetAwaiter().GetResult();
             _user.AddToRoleAsync(client, IdentityConfiguration.Client).GetAwaiter().GetResult();
 
             var clientClaims = _user.AddClaimsAsync(client, new Claim[]

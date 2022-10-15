@@ -1,15 +1,11 @@
-// Copyright (c) Duende Software. All rights reserved.
-// See LICENSE in the project root for license information.
-
-
 using Duende.IdentityServer;
 using Duende.IdentityServer.Events;
 using Duende.IdentityServer.Extensions;
 using Duende.IdentityServer.Models;
 using Duende.IdentityServer.Services;
 using Duende.IdentityServer.Stores;
-using eShop.IdentityServer.Models;
-using GeekShopping.IdentityServer.MainModule.Account;
+using eShop.IdentityServer.MainModule.Account;
+using eShop.IdentityServer.Model;
 using IdentityModel;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;

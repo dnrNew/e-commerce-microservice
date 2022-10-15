@@ -1,5 +1,5 @@
 ﻿using eShop.IdentityServer.Model.Context;
-using eShop.IdentityServer.Models;
+using eShop.IdentityServer.Model;
 using IdentityModel;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;

@@ -1,11 +1,7 @@
 ﻿using IdentityServerHost.Quickstart.UI;
-using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Threading.Tasks;
 
-namespace GeekShopping.IdentityServer.MainModule.Account
+namespace eShop.IdentityServer.MainModule.Account
 {
     public class RegisterViewModel
     {
