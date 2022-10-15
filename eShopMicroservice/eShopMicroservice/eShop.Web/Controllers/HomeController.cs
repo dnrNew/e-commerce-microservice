@@ -35,6 +35,7 @@ namespace eShop.Web.Controllers
         public async Task<IActionResult> Login()
         {
             var accessToken = await HttpContext.GetTokenAsync("access_token");
+
             var login = RedirectToAction(nameof(Index));
 
             return login;

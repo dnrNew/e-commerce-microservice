@@ -1,7 +1,9 @@
+using Duende.IdentityServer.Services;
 using eShop.IdentityServer.Configuration;
 using eShop.IdentityServer.Initializer;
 using eShop.IdentityServer.Model;
 using eShop.IdentityServer.Model.Context;
+using eShop.IdentityServer.Services;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
@@ -33,6 +35,7 @@ namespace eShop.IdentityServer
                 .AddAspNetIdentity<ApplicationUser>();
 
             builder.Services.AddScoped<IDbInitializer, DbInitializer>();
+            builder.Services.AddScoped<IProfileService, ProfileService>();
 
             builder.Services.AddControllersWithViews();
 
