@@ -9,3 +9,4 @@ USE eshop_identity_server;
 
 CREATE DATABASE eshop_cart_api;
 USE eshop_cart_api;
+
