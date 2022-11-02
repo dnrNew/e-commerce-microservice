@@ -94,7 +94,7 @@ namespace eShop.CartAPI.Repository
                 await _context.SaveChangesAsync();
             }
 
-            var cartHeader = _context.CartHeaders.AsNoTracking().FirstOrDefaultAsync(c => c.UserId == cart.CartHeader.UserId);
+            var cartHeader = await _context.CartHeaders.AsNoTracking().FirstOrDefaultAsync(c => c.UserId == cart.CartHeader.UserId);
 
             if (cartHeader == null)
             {

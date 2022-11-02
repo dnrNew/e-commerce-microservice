@@ -11,11 +11,13 @@ namespace eShop.Web.Controllers
     {
         private readonly ILogger<HomeController> _logger;
         private readonly IProductService _productService;
+        private readonly ICartService _cartService;
 
-        public HomeController(ILogger<HomeController> logger, IProductService productService)
+        public HomeController(ILogger<HomeController> logger, IProductService productService, ICartService cartService)
         {
             _logger = logger;
             _productService = productService;
+            _cartService = cartService;
         }
 
         public async Task<IActionResult> Index()
@@ -30,6 +32,40 @@ namespace eShop.Web.Controllers
         {
             var token = await HttpContext.GetTokenAsync("access_token");
             var productModel = await _productService.GetProductById(id, token);
+
+            return View(productModel);
+        }
+
+        [HttpPost]
+        [ActionName("Details")]
+        [Authorize]
+        public async Task<IActionResult> DetailsPost(ProductViewModel productModel)
+        {
+            var token = await HttpContext.GetTokenAsync("access_token");
+         
+            CartViewModel cart = new()
+            {
+                CartHeader = new CartHeaderViewModel()
+                {
+                    UserId = User.Claims.Where(u => u.Type == "sub")?.FirstOrDefault()?.Value
+                }
+            };
+
+            CartDetailViewModel cartDetail = new CartDetailViewModel()
+            {
+                Count = productModel.Count,
+                ProductId = productModel.Id,
+                Product = await _productService.GetProductById(productModel.Id, token)
+            };
+
+            List<CartDetailViewModel> cartDetails = new List<CartDetailViewModel>();
+            cartDetails.Add(cartDetail);
+            cart.CartDetails = cartDetails;
+
+            var response = await _cartService.AddItemToCart(cart, token);
+
+            if (response != null)
+                return RedirectToAction(nameof(Index));
 
             return View(productModel);
         }
