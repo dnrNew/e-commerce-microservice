@@ -1,4 +1,6 @@
 ﻿using AutoMapper;
+using eShop.CartAPI.Data.ValueObjects;
+using eShop.CouponAPI.Model;
 
 namespace eShop.CouponAPI.Config
 {
@@ -8,7 +10,7 @@ namespace eShop.CouponAPI.Config
         {
             var mappingConfig = new MapperConfiguration(config =>
             {
-                //config.CreateMap<ProductVO, Product>().ReverseMap();
+                config.CreateMap<CouponVO, Coupon>().ReverseMap();
             });
 
             return mappingConfig;

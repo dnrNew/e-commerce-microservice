@@ -12,7 +12,7 @@ namespace eShop.CouponAPI.Model.Context
         {
         }
 
-        //public DbSet<Product> Products { get; set; }
+        public DbSet<Coupon> Coupons { get; set; }
                 
     }
 }
