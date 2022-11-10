@@ -10,3 +10,8 @@ USE eshop_identity_server;
 CREATE DATABASE eshop_cart_api;
 USE eshop_cart_api;
 
+DESCRIBE cart_header;
+ALTER TABLE cart_header MODIFY coupon_code longtext;
+
+CREATE DATABASE eshop_coupon_api;
+USE eshop_coupon_api;
