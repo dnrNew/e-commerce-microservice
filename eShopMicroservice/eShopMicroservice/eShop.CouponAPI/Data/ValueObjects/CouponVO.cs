@@ -1,7 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
-using System.ComponentModel.DataAnnotations;
-
-namespace eShop.CartAPI.Data.ValueObjects
+namespace eShop.CouponAPI.Data.ValueObjects
 {
     public class CouponVO
     {

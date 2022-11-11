@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using eShop.CartAPI.Data.ValueObjects;
+using eShop.CouponAPI.Data.ValueObjects;
 using eShop.CouponAPI.Model;
 
 namespace eShop.CouponAPI.Config
