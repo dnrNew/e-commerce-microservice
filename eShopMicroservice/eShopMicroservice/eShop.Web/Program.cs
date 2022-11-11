@@ -8,6 +8,7 @@ builder.Services.AddControllersWithViews();
 
 builder.Services.AddHttpClient<IProductService, ProductService>(w => w.BaseAddress = new Uri(builder.Configuration["ServiceUrls:ProductAPI"]));
 builder.Services.AddHttpClient<ICartService, CartService>(w => w.BaseAddress = new Uri(builder.Configuration["ServiceUrls:CartAPI"]));
+//builder.Services.AddHttpClient<ICouponService, CouponService>(w => w.BaseAddress = new Uri(builder.Configuration["ServiceUrls:CouponAPI"]));
 
 builder.Services.AddAuthentication(options =>
 {
