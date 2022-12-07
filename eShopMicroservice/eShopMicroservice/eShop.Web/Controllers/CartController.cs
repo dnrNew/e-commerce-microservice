@@ -1,4 +1,5 @@
 ﻿using eShop.Web.Models;
+using eShop.Web.Services;
 using eShop.Web.Services.IServices;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
@@ -10,11 +11,13 @@ namespace eShop.Web.Controllers
     {
         private readonly IProductService _productService;
         private readonly ICartService _cartService;
+        private readonly ICouponService _couponService;
 
-        public CartController(IProductService productService, ICartService cartService)
+        public CartController(IProductService productService, ICartService cartService, ICouponService couponService)
         {
             _productService = productService;
             _cartService = cartService;
+            _couponService = couponService;
         }
 
         [Authorize]
@@ -66,6 +69,12 @@ namespace eShop.Web.Controllers
             return View();
         }
 
+        [HttpGet]
+        public async Task<IActionResult> Checkout()
+        {
+            return View(await GetUserCart());
+        }
+
         private async Task<CartViewModel> GetUserCart()
         {
             var token = await HttpContext.GetTokenAsync("access_token");
@@ -73,12 +82,22 @@ namespace eShop.Web.Controllers
 
             var response = await _cartService.GetCartByUserId(userId, token);
 
-            if (response?.CartHeader == null)
+            if (response?.CartHeader != null)
             {
+                if (!string.IsNullOrEmpty(response.CartHeader.CouponCode))
+                {
+                    var coupon = await _couponService.GetCoupon(response.CartHeader.CouponCode, token);
+
+                    if (coupon?.CouponCode != null)
+                        response.CartHeader.DiscountAmount = coupon.DiscountAmount;
+                }
+
                 foreach (var detail in response.CartDetails)
                 {
                     response.CartHeader.PurchaseAmount += (detail.Product.Price * detail.Count);
                 }
+
+                response.CartHeader.PurchaseAmount -= response.CartHeader.DiscountAmount;
             }
 
             return response;

@@ -9,7 +9,7 @@ namespace eShop.Web.Services
     public class CouponService : ICouponService
     {
         private readonly HttpClient _client;
-        public const string BasePath = "api/v1/cart";
+        public const string BasePath = "api/v1/coupon";
 
         public CouponService(HttpClient client)
         {

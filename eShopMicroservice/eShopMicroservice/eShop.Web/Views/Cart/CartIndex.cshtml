@@ -80,9 +80,10 @@
                                     Aplicar
                                 </button>
                             }
-                            else {
+                            else
+                            {
                                 <span>Cupom:</span>
-                                <input asp-for="CartHeader.CouponCode" disabled/>
+                                <input asp-for="CartHeader.CouponCode" disabled />
                                 <button type="submit" asp-action="RemoveCoupon" class="btn-danger">
                                     Remove
                                 </button>
@@ -93,6 +94,14 @@
                                 Valor Total: @string.Format("{0:c}", Model.CartHeader.PurchaseAmount)
                                 <br />
                             </span>
+
+                            @if (Model.CartHeader.DiscountAmount > 0)
+                            {
+                                <span class="text-success">
+                                    Desconto: @string.Format("{0:c}", Model.CartHeader.DiscountAmount)
+                                    <br />
+                                </span>
+                            }
                         </div>
                     </div>
                 </div>
