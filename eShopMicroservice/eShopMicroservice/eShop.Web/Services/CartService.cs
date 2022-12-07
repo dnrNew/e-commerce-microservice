@@ -63,14 +63,30 @@ namespace eShop.Web.Services
             return status;
         }
 
-        public async Task<bool> ApplyCoupon(CartViewModel cart, string couponCode, string token)
+        public async Task<bool> ApplyCoupon(CartViewModel cart, string token)
         {
-            throw new NotImplementedException();
+            _client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
+            var response = await _client.PostAsJson($"{BasePath}/apply-coupon", cart);
+
+            if (!response.IsSuccessStatusCode)
+                throw new Exception("Something went wrong calling the API");
+
+            var status = await response.ReadContentAs<bool>();
+
+            return status;
         }
 
         public async Task<bool> RemoveCoupon(string userId, string token)
         {
-            throw new NotImplementedException();
+            _client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
+            var response = await _client.DeleteAsync($"{BasePath}/remove-coupon/{userId}");
+
+            if (!response.IsSuccessStatusCode)
+                throw new Exception("Something went wrong calling the API");
+
+            var status = await response.ReadContentAs<bool>();
+
+            return status;
         }
 
         public async Task<bool> ClearCart(string userId, string token)
