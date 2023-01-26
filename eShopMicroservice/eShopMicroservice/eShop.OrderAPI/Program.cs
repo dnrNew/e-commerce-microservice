@@ -1,3 +1,4 @@
+using eShop.OrderAPI.MessageConsumer;
 using eShop.OrderAPI.Model.Context;
 using eShop.OrderAPI.Repository;
 using Microsoft.EntityFrameworkCore;
@@ -29,11 +30,11 @@ builder.Services.AddAuthorization(options =>
     });
 });
 
-var dbContext = new DbContextOptionsBuilder<MySqlContext>();
-dbContext.UseMySql(connection, new MySqlServerVersion(new Version(8, 0, 22)));
+var dbContextBuilder = new DbContextOptionsBuilder<MySqlContext>();
+dbContextBuilder.UseMySql(connection, new MySqlServerVersion(new Version(8, 0, 22)));
 
-builder.Services.AddSingleton(new OrderRepository(dbContext.Options));
-//builder.Services.AddSingleton<IRabbitMQMessageSender, RabbitMQMessageSender>();
+builder.Services.AddSingleton(new OrderRepository(dbContextBuilder.Options));
+builder.Services.AddHostedService<RabbitMQCheckoutConsumer>();
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(c =>
