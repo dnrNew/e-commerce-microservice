@@ -12,11 +12,15 @@ namespace eShop.CartAPI.Controllers
     public class CartController : ControllerBase
     {
         private ICartRepository _cartRepository;
+        private ICouponRepository _couponRepository;
         private IRabbitMQMessageSender _rabbitMQMessageSender;
 
-        public CartController(ICartRepository cartRepository, IRabbitMQMessageSender rabbitMQMessageSender)
+        public CartController(ICartRepository cartRepository, 
+            ICouponRepository couponRepository, 
+            IRabbitMQMessageSender rabbitMQMessageSender)
         {
             _cartRepository = cartRepository ?? throw new ArgumentNullException(nameof(cartRepository));
+            _couponRepository = couponRepository ?? throw new ArgumentNullException(nameof(couponRepository));
             _rabbitMQMessageSender = rabbitMQMessageSender ?? throw new ArgumentNullException(nameof(rabbitMQMessageSender));
         }
 
@@ -96,6 +100,16 @@ namespace eShop.CartAPI.Controllers
 
             if (cart == null)
                 return NotFound();
+
+            var token = Request.Headers["Authorization"];
+
+            if (string.IsNullOrEmpty(vo.CouponCode))
+            {
+                CouponVO coupon = await _couponRepository.GetCoupon(vo.CouponCode, token);
+
+                if (coupon.DiscountAmount != vo.DiscountAmount)
+                    return StatusCode(412);
+            }
 
             vo.CartDetails = cart.CartDetails;
             vo.DateTime = DateTime.Now;
