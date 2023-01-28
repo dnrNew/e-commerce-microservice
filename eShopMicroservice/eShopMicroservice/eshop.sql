@@ -32,3 +32,5 @@ select * from order_header;
 
 CREATE DATABASE eshop_email;
 USE eshop_email;
+
+select * from email_logs;
