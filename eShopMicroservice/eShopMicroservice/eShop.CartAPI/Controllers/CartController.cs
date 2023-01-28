@@ -116,6 +116,8 @@ namespace eShop.CartAPI.Controllers
 
             _rabbitMQMessageSender.SendMessage(vo, "checkoutQueue");
 
+            await _cartRepository.ClearCart(vo.UserId);
+
             return Ok(vo);
         }
     }
