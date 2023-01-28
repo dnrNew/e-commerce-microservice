@@ -29,3 +29,6 @@ USE eshop_order_api;
 
 select * from order_detail;
 select * from order_header;
+
+CREATE DATABASE eshop_email;
+USE eshop_email;
