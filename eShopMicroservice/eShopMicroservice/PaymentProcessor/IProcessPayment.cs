@@ -1,7 +1,7 @@
 ﻿namespace eShop.PaymentProcessor
 {
-    interface IProcessPayment
+    public interface IProcessPayment
     {
-        public bool PaymentProcessor();
+        bool PaymentProcessor();
     }
 }

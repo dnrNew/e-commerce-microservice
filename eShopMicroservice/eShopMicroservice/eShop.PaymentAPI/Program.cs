@@ -1,42 +1,13 @@
-using eShop.OrderAPI.MessageConsumer;
-using eShop.OrderAPI.Model.Context;
-using eShop.OrderAPI.RabbitMQSender;
-using eShop.OrderAPI.Repository;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.IdentityModel.Tokens;
+using eShop.PaymentAPI.MessageConsumer;
+using eShop.PaymentAPI.RabbitMQSender;
+using eShop.PaymentProcessor;
 using Microsoft.OpenApi.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers();
-
-var connection = builder.Configuration["MySqlConnection:MySqlConnectionString"];
-builder.Services.AddDbContext<MySqlContext>(options => options.UseMySql(connection, new MySqlServerVersion(new Version(8, 0, 22))));
-
-builder.Services.AddAuthentication("Bearer").AddJwtBearer("Bearer", options =>
-{
-    options.Authority = "https://localhost:4435/";
-    options.TokenValidationParameters = new TokenValidationParameters
-    {
-        ValidateAudience = false
-    };
-});
-
-builder.Services.AddAuthorization(options =>
-{
-    options.AddPolicy("ApiScope", policy =>
-    {
-        policy.RequireAuthenticatedUser();
-        policy.RequireClaim("scope", "eShop");
-    });
-});
-
-var dbContextBuilder = new DbContextOptionsBuilder<MySqlContext>();
-dbContextBuilder.UseMySql(connection, new MySqlServerVersion(new Version(8, 0, 22)));
-
-builder.Services.AddSingleton(new OrderRepository(dbContextBuilder.Options));
-builder.Services.AddHostedService<RabbitMQCheckoutConsumer>();
 builder.Services.AddHostedService<RabbitMQPaymentConsumer>();
+builder.Services.AddSingleton<IProcessPayment, ProcessPayment>();
 builder.Services.AddSingleton<IRabbitMQMessageSender, RabbitMQMessageSender>();
 
 builder.Services.AddEndpointsApiExplorer();
