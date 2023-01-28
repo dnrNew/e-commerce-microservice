@@ -1,5 +1,6 @@
 using eShop.OrderAPI.MessageConsumer;
 using eShop.OrderAPI.Model.Context;
+using eShop.OrderAPI.RabbitMQSender;
 using eShop.OrderAPI.Repository;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
@@ -35,6 +36,7 @@ dbContextBuilder.UseMySql(connection, new MySqlServerVersion(new Version(8, 0, 2
 
 builder.Services.AddSingleton(new OrderRepository(dbContextBuilder.Options));
 builder.Services.AddHostedService<RabbitMQCheckoutConsumer>();
+builder.Services.AddSingleton<IRabbitMQMessageSender, RabbitMQMessageSender>();
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(c =>

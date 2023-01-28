@@ -1,5 +1,6 @@
 ﻿using eShop.OrderAPI.Messages;
 using eShop.OrderAPI.Model;
+using eShop.OrderAPI.RabbitMQSender;
 using eShop.OrderAPI.Repository;
 using RabbitMQ.Client;
 using RabbitMQ.Client.Events;
@@ -13,6 +14,7 @@ namespace eShop.OrderAPI.MessageConsumer
         private readonly OrderRepository _repository;
         private IConnection _connection;
         private IModel _channel;
+        private IRabbitMQMessageSender _rabbitMQMessageSender;
 
         public RabbitMQCheckoutConsumer(OrderRepository repository, IConnection connection, IModel channel)
         {
@@ -21,9 +23,10 @@ namespace eShop.OrderAPI.MessageConsumer
             _channel = channel;
         }
 
-        public RabbitMQCheckoutConsumer(OrderRepository repository)
+        public RabbitMQCheckoutConsumer(OrderRepository repository, IRabbitMQMessageSender rabbitMQMessageSender)
         {
             _repository = repository;
+            _rabbitMQMessageSender = rabbitMQMessageSender;
 
             var factory = new ConnectionFactory
             {
@@ -89,6 +92,26 @@ namespace eShop.OrderAPI.MessageConsumer
             }
 
             await _repository.AddOrder(order);
+
+            PaymentVO payment = new()
+            {
+                Name = order.FirstName + " " + order.LastName,
+                CardNumber = order.CardNumber,
+                Cvv = order.Cvv,
+                ExpiryMonthYear = order.ExpiryMonthYear,
+                OrderId = order.Id,
+                PurchaseAmount = order.PurchaseAmount,
+                Email = order.Email
+            };
+
+            try
+            {
+                _rabbitMQMessageSender.SendMessage(payment, "orderpaymentprocessqueue");
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error sender payment RabbitMQ queue", ex.InnerException);
+            }
         }
     }
 }

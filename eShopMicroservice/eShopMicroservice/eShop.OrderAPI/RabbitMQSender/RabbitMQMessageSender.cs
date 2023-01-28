@@ -1,10 +1,10 @@
-﻿using eShop.CartAPI.Messages;
-using eShop.MessageBus;
+﻿using eShop.MessageBus;
+using eShop.OrderAPI.Messages;
 using RabbitMQ.Client;
 using System.Text;
 using System.Text.Json;
 
-namespace eShop.CartAPI.RabbitMQSender
+namespace eShop.OrderAPI.RabbitMQSender
 {
     public class RabbitMQMessageSender : IRabbitMQMessageSender
     {
@@ -38,7 +38,7 @@ namespace eShop.CartAPI.RabbitMQSender
                 WriteIndented = true
             };
 
-            var json = JsonSerializer.Serialize<CheckoutHeaderVO>((CheckoutHeaderVO)message, options);
+            var json = JsonSerializer.Serialize<PaymentVO>((PaymentVO)message, options);
             var body = Encoding.UTF8.GetBytes(json);
 
             return body;
